@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import { AppButton } from "../../components/UI/AppButton/AppButton";
 import { AppInput } from "../../components/UI/AppInput/AppInput";
-import "./LoginPage.scss";
 import { LoginWith } from "../../components/LoginWith/LoginWith";
 import { AppHeading } from "../../components/Typography/AppHeading/AppHeading";
+import { SCLoginPage } from "./LoginPage.styled";
 
 export const LoginPage = () => {
   return (
-    <div className="LoginPage">
+    <SCLoginPage>
       <AppHeading headingText={"Авторизация"} headingType={"h1"} />
       <form action="#">
         <AppInput inputType={"tel"} inputPlaceholder={"Номер телефона"} />
@@ -24,6 +24,6 @@ export const LoginPage = () => {
         <p>Войти с помощью</p>
         <LoginWith />
       </div>
-    </div>
+    </SCLoginPage>
   );
 };

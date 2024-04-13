@@ -10,11 +10,12 @@ import { Header } from "../../components/UI/Header/Header";
 import { UserPosts } from "../../components/UserPosts/UserPosts";
 import { WhatsNew } from "../../components/WhatsNew/Whatsnew";
 import "./ProfilePage.scss";
+import { SCProfilePage } from "./ProfilePage.styled";
 
 export const ProfilePage = () => {
   return (
-    <div className="ProfilePage">
-      <Header />
+<SCProfilePage>
+    <Header />
       <aside className="LeftSide">
         <Navbar />
         <FollowersList />
@@ -31,6 +32,6 @@ export const ProfilePage = () => {
         <FriendBlock />
         <MusicBlock />
       </aside>
-    </div>
+      </SCProfilePage>
   );
 };

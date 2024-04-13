@@ -8,10 +8,11 @@ import { Friendslist } from "../../components/FriendsList/Friendslist";
 import { MusicBlock } from "../../components/MusicBlock/Musicblock";
 import { Header } from "../../components/UI/Header/Header";
 import "./MainPage.scss";
+import { SCMainPage } from "./MainPage.styled";
 
 export const MainPage = () => {
   return (
-    <div className="MainPage">
+    <SCMainPage>
       <Header/>
       <aside className="LeftSide">
         <Navbar/>
@@ -27,6 +28,6 @@ export const MainPage = () => {
         <Friendslist/>
         <MusicBlock/>    
       </aside>
-    </div>
+    </SCMainPage>
   );
 };

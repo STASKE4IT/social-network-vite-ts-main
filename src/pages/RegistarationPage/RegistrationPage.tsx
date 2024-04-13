@@ -3,10 +3,11 @@ import { LoginWith } from "../../components/LoginWith/LoginWith"
 import { AppHeading } from "../../components/Typography/AppHeading/AppHeading"
 import { AppButton } from "../../components/UI/AppButton/AppButton"
 import { AppInput } from "../../components/UI/AppInput/AppInput"
+import { SCLoginPage } from "../LoginPage/LoginPage.styled"
 
 export const RegistrationPage = () => {
   return (
-    <div className="LoginPage">
+    <SCLoginPage>
       <AppHeading headingText={"Регистрация"} headingType={"h1"}/>
       <form action="#">
         <AppInput inputType={"text"} inputPlaceholder={"Введите имя"} />
@@ -23,6 +24,6 @@ export const RegistrationPage = () => {
         <p>Регистрация с помощью</p>
         <LoginWith />
       </div>
-    </div>
+    </SCLoginPage>
   )
 }
