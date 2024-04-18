@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useRouteLoaderData } from "react-router-dom";
 import { AppButton } from "../../components/UI/AppButton/AppButton";
 import { AppInput } from "../../components/UI/AppInput/AppInput";
 import { LoginWith } from "../../components/LoginWith/LoginWith";
@@ -9,16 +9,16 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 interface ILoginForm {
-  userEmail: string;
-  userPassword: string;
+  useremail: string;
+  userpassword: string;
 }
 
 const loginFormSchema = yup.object({
-  userEmail: yup.string().required("SALAM ALEYKUM E, заполнить надо"),
-  userPassword: yup
+  useremail: yup.string().required("Обязательное поле"),
+  userpassword: yup
     .string()
-    .required("E SALAM ALEYKUM E, заполнить надо")
-    .min(8, "SALAM ALEYKUM E, надо не менее 8 символов"),
+    .required("Введите пароль")
+    .min(8, "Не менее 8 символов"),
 });
 
 export const LoginPage = () => {
@@ -28,32 +28,52 @@ export const LoginPage = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(loginFormSchema),
-    defaultValues: { userEmail: "", userPassword: "" },
+    defaultValues: { useremail: "", userpassword: "" },
   });
 
-  const onLoginForSubmit: SubmitHandler<ILoginForm> = (data) => {
-    console.log(data);
+const navigate = useNavigate()
+
+  const onLoginFormSubmit: SubmitHandler<ILoginForm> = (data) => {
+    data ? navigate("/main") : ("/")
+    // if (data) {
+    //   navigate("/main")
+    // } else {
+    //   navigate("/")
+    // }
   };
 
   return (
     <SCLoginPage>
       <AppHeading headingText={"Авторизация"} headingType={"h1"} />
-      <form onSubmit={handleSubmit(onLoginForSubmit)}>
+      <form onSubmit={handleSubmit(onLoginFormSubmit)}>
         <Controller
-          name="userEmail"
+          name="useremail"
           control={control}
           render={({ field }) => (
-            <AppInput type={"email"} placeholder={"E-Mail"} {...field} />
+            <AppInput
+              isError={errors.useremail ? true : false}
+              errorMessage={errors.useremail?.message}
+              type={"email"}
+              placeholder={"Почта"}
+              {...field}
+            />
           )}
         />
+
         <Controller
-          name="userPassword"
+          name="userpassword"
           control={control}
           render={({ field }) => (
-            <AppInput type={"password"} placeholder={"Пароль"} {...field} />
+            <AppInput
+              isError={errors.userpassword ? true : false}
+              errorMessage={errors.userpassword?.message}
+              type={"password"}
+              placeholder={"Пароль"}
+              {...field}
+            />
           )}
         />
-        <AppButton buttonText={"Войти"} type={"button"} />
+        <AppButton buttonText={"Войти"} type="submit" />
       </form>
       <Link to="#">Забыли пароль?</Link>
       <div className="registration">

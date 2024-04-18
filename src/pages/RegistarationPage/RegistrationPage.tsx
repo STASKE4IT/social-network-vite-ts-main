@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { LoginWith } from "../../components/LoginWith/LoginWith";
 import { AppHeading } from "../../components/Typography/AppHeading/AppHeading";
 import { AppButton } from "../../components/UI/AppButton/AppButton";
@@ -27,6 +27,7 @@ const registrationFormSchema = yup.object({
   userCity: yup.string().required("Укажите город"),
 });
 
+
 export const RegistrationPage = () => {
   const {
     control,
@@ -42,9 +43,10 @@ export const RegistrationPage = () => {
     },
   });
 
+  const navigate = useNavigate()
+
   const onLoginForSubmit: SubmitHandler<IRegistrationForm> = (data) => {
-    console.log(data);
-  };
+data ? navigate ("/main") : ("/")  };
   return (
     <SCLoginPage>
       <AppHeading headingText={"Регистрация"} headingType={"h1"} />
@@ -53,38 +55,68 @@ export const RegistrationPage = () => {
           name="userName"
           control={control}
           render={({ field }) => (
-            <AppInput type={"text"} placeholder={"Введите имя"} {...field} />
+            <AppInput
+              type={"text"}
+              isError={errors.userName ? true : false}
+              errorMessage={errors.userName?.message}
+              placeholder={"Введите имя"}
+              {...field}
+            />
           )}
         />
         <Controller
           name="userEmail"
           control={control}
           render={({ field }) => (
-            <AppInput type={"email"} placeholder={"E-Mail"} {...field} />
+            <AppInput
+              type={"email"}
+              isError={errors.userEmail ? true : false}
+              errorMessage={errors.userEmail?.message}
+              placeholder={"E-Mail"}
+              {...field}
+            />
           )}
         />
         <Controller
           name="userPhoneNumber"
           control={control}
           render={({ field }) => (
-            <AppInput type={"number"} placeholder={"Введите номер телефоа"} {...field} />
+            <AppInput
+              type={"number"}
+              isError={errors.userPhoneNumber ? true : false}
+              errorMessage={errors.userPhoneNumber?.message}
+              placeholder={"Введите номер телефоа"}
+              {...field}
+            />
           )}
         />
         <Controller
           name="userPassword"
           control={control}
           render={({ field }) => (
-            <AppInput type={"text"} placeholder={"Введите пароль"} {...field} />
+            <AppInput
+              type={"text"}
+              isError={errors.userPassword ? true : false}
+              errorMessage={errors.userPassword?.message}
+              placeholder={"Введите пароль"}
+              {...field}
+            />
           )}
         />
         <Controller
           name="userCity"
           control={control}
           render={({ field }) => (
-            <AppInput type={"text"} placeholder={"Введите город"} {...field} />
+            <AppInput
+              type={"text"}
+              isError={errors.userCity ? true : false}
+              errorMessage={errors.userCity?.message}
+              placeholder={"Введите город"}
+              {...field}
+            />
           )}
         />
-        <AppButton buttonText={"Зарегистрироваться"} type={"button"} />
+        <AppButton buttonText={"Зарегистрироваться"} type={"submit"} />
       </form>
       <div className="registration">
         <span>
